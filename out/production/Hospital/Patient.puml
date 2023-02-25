@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Patient{
+name: String;
+address: String;
+diagnostic: String;
+birth: int;
+ID: int;
+
+showDiagnostic()
+}
+
+@enduml

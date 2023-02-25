@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Hospital{
+name: String;
+address: String;
+patients: Patient[];
+
+register()
+}
+
+
+@enduml
