@@ -10,8 +10,7 @@ public class Hospital {
     private List<Doctor> doctorList;
 
 
-
-    public Hospital(String name, String address){
+    public Hospital(String name, String address) {
         this.name = name;
         this.address = address;
 
@@ -19,22 +18,27 @@ public class Hospital {
         this.doctorList = new ArrayList<>();
 
     }
-    public void displayPatients(){
-        for (Patient patient: patientList){
+
+    public void displayPatients() {
+        for (Patient patient : patientList) {
+            System.out.println("Displaying patient.");
             patient.display();
+            Doctor doc = this.getDoctorID(patient.getDoctorID());
+            System.out.println("Displaying Doctor.");
+            doc.display();
         }
     }
 
-    public void addDoctors(Doctor doctor){
+    public void addDoctors(Doctor doctor) {
         doctorList.add(doctor);
     }
 
 
-    public void runDiagnostic(Patient patient){
-        patient.setDiagnostic(Disease.COVID);
+    public void runDiagnostic(Patient patient) {
+        patient.setDiagnostic(Disease.getRandomDisease());
     }
 
-    public void admitPatient(Patient patient){
+    public void admitPatient(Patient patient) {
 
         assignDoctor(patient);
 
@@ -42,15 +46,24 @@ public class Hospital {
 
     }
 
-    private void assignDoctor(Patient patient){
-        patient.setDoctor(doctorList.get(new Random().nextInt(doctorList.size())));
+    private void assignDoctor(Patient patient) {
+        Doctor doctor = doctorList.get(new Random().nextInt(doctorList.size()));
+        patient.setDoctorID(doctor.getId());
     }
 
-    public void medicalConsult(Patient patient){
-        Doctor doctor = patient.getDoctor();
+    public void medicalAppointment(Patient patient) {
+        Doctor doctor = this.getDoctorID((patient.getDoctorID()));
+
         doctor.runDiagnostic(patient);
     }
 
-
-
+    private Doctor getDoctorID(String id) {
+        for (Doctor doc: doctorList) {
+            if (doc.getId().equals(id)) {
+                return doc;
+            }
+        }
+        return null;
+    }
 }
+

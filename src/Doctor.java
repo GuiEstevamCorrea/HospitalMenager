@@ -1,22 +1,28 @@
-public class Doctor {
+public class Doctor extends Person{
 
     private String name;
     private String address;
     private Specialty specialty;
+    private String id;
 
-    public Doctor(String name, String address, Specialty specialty){
-        this.name = name;
-        this.address = address;
+    public Doctor(String name, String address, Specialty specialty, String id){
+        super(name,address);
         this.specialty = specialty;
+        this.id = id;
     }
 
     public void display(){
-        System.out.println("Doctor's name: " + this.name);
+        super.display();
         System.out.println("Doctor's specialty: " + this.specialty);
     }
 
     public void runDiagnostic(Patient patient){
-        patient.setDiagnostic(Disease.COVID);
+
+        patient.setDiagnostic(Disease.getRandomDisease());
+    }
+
+    public String getId(){
+        return this.id;
     }
 
 }
